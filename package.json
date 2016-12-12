@@ -1,0 +1,22 @@
+{
+  "name": "projet_leap_motion",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/optine/projet_leap_motion.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/optine/projet_leap_motion/issues"
+  },
+  "homepage": "https://github.com/optine/projet_leap_motion#readme",
+  "dependencies": {
+    "phaser": "^2.6.2"
+  }
+}
