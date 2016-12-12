@@ -31,13 +31,13 @@ function preload()
 function create()
 {
   // Déclaration de la taille du world (800x6000 pixels)
-  game.add.tileSprite(0, 0, 800, 6000, 'background');
+  game.add.tileSprite(0, 0, 800, 20000, 'background');
 
-  game.world.setBounds(0, 0, 800, 6000);
+  game.world.setBounds(0, 0, 800, 20000);
 
   // Démarrage du système de Physics : ARCADE
   game.physics.startSystem(Phaser.Physics.ARCADE);
-  game.physics.arcade.gravity.y = 0;//-200;
+  game.physics.arcade.gravity.y = -10;
 
   // Création des curseur pour le controle clavier
   cursors = game.input.keyboard.createCursorKeys();
@@ -52,7 +52,6 @@ function create()
 
 function update()
 {
-  player.body.velocity.y = -300;
 
 /*  if (cursors.up.isDown)
   {
