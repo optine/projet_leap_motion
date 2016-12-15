@@ -3,12 +3,61 @@
 <head>
   <meta charset="UTF-8">
   <title>Montgolfière</title>
+  <link rel="stylesheet" href="css/bar.css">
+  <style>body { margin: 0 } canvas { display: block };</style>
+    <style type="text/css">  
+
+ #d2 {  
+  position: absolute;  
+  overflow: hidden;  
+  clip: rect(0px,0px,20px,0px);  
+  background-color: rgba(71,62,255,0.7);  
+  height:20px;
+  width: 200px;
+  margin-left: 1200px;
+  padding: 0px;
+  border-radius: 20px;  
+ }  
+
+ </style>  
+ <script type="text/javascript">  
+ <!--  
+  function mTimeStamp() {  
+   var time = new Date();  
+   time = Date.parse(time)+time.getMilliseconds()  
+   return time;  
+  }  
+   
+  function progBar() {  
+   elm = document.getElementById('d2');  
+   elm.timeStart = mTimeStamp();  
+   var duree = 50000;  
+   var valEnd = 200;  
+   var valActu = 0;  
+   elm.interval = setInterval(function() {  
+    valActu = (mTimeStamp() - elm.timeStart) / duree * valEnd;  
+    if(valActu > valEnd) valActu = valEnd;  
+    elm.style.clip= 'rect(0px,' + valActu + 'px,20px,0px)';  
+     if(valActu == valEnd) clearInterval(elm.interval);  
+   },10);  
+  }  
+ //-->  
+ </script>    
 </head>
 <body>
 
-<script src="node_modules/phaser/v2/build/phaser.js"></script>
-<script src="scripts/app.js"></script>
-<script type="scripts/main.js"></script>
+ <div id="empty">  
+  <div id="d2"></div>  
+ </div>  
+ <script type="text/javascript">  
+ <!--  
+  progBar();  
+ //-->  
+ </script>
 
+<script src="node_modules/phaser/build/phaser.js"></script>
+<script src="node_modules/leapjs/leap-0.6.4.js"></script>
+<script src="scripts/app.js"></script>
+<script src="scripts/main.js"></script>
 </body>
 </html>

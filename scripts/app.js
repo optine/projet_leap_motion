@@ -4,7 +4,7 @@
 
 var game = new Phaser.Game(
   innerWidth,
-  850,
+  innerHeight,
   Phaser.CANVAS,
   'montgolfiere',
   {
@@ -16,7 +16,7 @@ var game = new Phaser.Game(
 );
 var player;
 var item;
-var enemy;
+var ennemies;
 var time;
 var cursors;
 
@@ -28,13 +28,15 @@ function preload()
 {
   game.load.image('background','images/blue-sky.jpg');
   game.load.image('balloon', 'images/HotAirBalloon.png');
-  game.load.image('bulle', 'images/helium.png')
-  game.load.image('ennemi', 'images/oiseau.png' )
+  game.load.image('balloon2', 'images/HotAirBalloon2.png');
+  // game.load.image('bulle', 'images/helium.png')
+  game.load.image('ennemi', 'images/oiseau_v2.png' )
 }
 
 
 function create()
 {
+  // game.create.texture('ennemi', 2, 2, 0);
   // Déclaration de la taille du world (800x6000 pixels)
   game.add.tileSprite(0, 0, innerWidth, 20000, 'background');
 
@@ -49,29 +51,33 @@ function create()
   
   // Ajout du ballon
   player = game.add.sprite(100, 300, 'balloon');
-  item = game.add.sprite(game.world.upX, 100, 100, 'bulle');
+  // item = game.add.sprite(game.world.upX, 100, 100, 'bulle');
   // Activation de la gravité sur le player
   game.physics.arcade.enable(player);
   player.body.collideWorldBounds = true;
   player.y = game.world.height;
-  enemy = game.add.physicsGroup();
   var tween = game.add.tween(player).to( { x: 1000 }, 5000, Phaser.Easing.Linear.None, true, 0, 1000, true);
-  var enemy = game.create(Math.random() * (innerWidth - 100) + 100, 0, 'ennemi');
-  enemy.body.velocity.x = game.rnd.between(100, 200);
-  y += 48;
+
+  // // Ennemies
+  ennemies = game.add.physicsGroup();
+  for (var i = 0; i < 50; i++)
+  {
+      var ennemy = ennemies.create(game.world.randomX, game.world.randomY - game.camera.height, 'ennemi');
+      ennemy.body.velocity.x = game.rnd.between(200, 400);
+  }
 
 }
 
 function update()
 {
-  player.body.velocity.y = -100;
-  game.physics.arcade.overlap(player, enemy, null, this);
-  enemy.forEach(checkPos, this);
-/*  if (cursors.up.isDown)
+  player.body.velocity.y = -200;
+  game.physics.arcade.overlap(player, ennemies, collision);
+  ennemies.forEach(checkPos, this);
+/*  if (leap.up.isDown)
   {
     player.body.velocity.y = MATH PI/8;
   }
-  else if (cursors.down.isDown)
+  else if (leap.down.isDown)
   {
     player.body.velocity.y = +300;
   }*/
@@ -81,7 +87,7 @@ function update()
 
 function checkPos (enemy) {
 
-    if (enemy.x > 800)
+    if (enemy.x > game.world.width)
     {
         enemy.x = -100;
     }
@@ -92,4 +98,10 @@ function render()
 {
   game.debug.cameraInfo(game.camera, 32, 32);
   game.debug.spriteCoords(player, 32, 500);
+}
+
+function collision(player, enemy) {
+  enemy.kill();
+  player.loadTexture('balloon2', 0, true);
+  console.log('TOUCHÉ');
 }

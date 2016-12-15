@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/optine/projet_leap_motion#readme",
   "dependencies": {
+    "leapjs": "^0.6.4",
     "phaser": "^2.6.2"
   }
 }
