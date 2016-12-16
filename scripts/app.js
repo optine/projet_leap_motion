@@ -75,11 +75,21 @@ function update()
   ennemies.forEach(checkPos, this);
 /*  if (leap.up.isDown)
   {
-    player.body.velocity.y = MATH PI/8;
+    player.body.velocity.y = -400 ;
+    setTimeout(1000);
   }
   else if (leap.down.isDown)
   {
-    player.body.velocity.y = +300;
+    this.slowMotion  =  2,0 ;
+  }else if (leap.right.isDown)
+  {
+    player.body.velocity.x = -400; "???"
+    player.body.velocity.y = -250;
+  }else if (leap.left.isDown)
+  {
+    player.body.velocity.x = -300;
+    player.body.velocity.y = -100;
+    this.slowMotion  =  1,5 ;
   }*/
 
   game.camera.follow(player);
@@ -103,5 +113,6 @@ function render()
 function collision(player, enemy) {
   enemy.kill();
   player.loadTexture('balloon2', 0, true);
+  setTimeout(function create() {player.loadTexture('balloon', 0, true);}, 1200);
   console.log('TOUCHÉ');
 }

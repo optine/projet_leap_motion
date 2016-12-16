@@ -11,9 +11,31 @@ Leap.loop({enableGestures: true}, (frame) => {
 			console.log('swipe détécté !', gesture);
 		} );
 	}
-	
-});
 
+if (gesture.type == "swipe") {
+          //Classify swipe as either horizontal or vertical
+          var isHorizontal = Math.abs(gesture.direction[0]) > Math.abs(gesture.direction[1]);
+          //Classify as right-left or up-down
+          if(isHorizontal){
+              if(gesture.direction[0] > 0){
+                  swipeDirection = "right";
+                  console.log("swipe right !");
+              } else {
+                  swipeDirection = "left";
+                  console.log("swipe left !");
+              }
+          } else { //vertical
+              if(gesture.direction[1] > 0){
+                  swipeDirection = "up";
+                  console.log("swipe up !");
+              } else {
+                  swipeDirection = "down";
+                  console.log("swipe down !");
+              }                  
+          }
+       }
+
+});
 // Fonction mapping 3D to 2D
 /*function to2D(leapPoint, frame){
 
